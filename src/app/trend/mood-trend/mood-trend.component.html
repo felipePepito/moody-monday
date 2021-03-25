@@ -1,1 +1,22 @@
-<p>mood-trend works!</p>
+<h1>Mood Trend</h1>
+
+<table class="table table-hover">
+	<thead>
+	<tr>
+		<th>Date</th>
+		<th>Valence</th>
+		<th>Arousal</th>
+		<th>Anger</th>
+		<th>Sadness</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr *ngFor="let moodState of moodStates | async">
+		<td>{{moodState.date.toLocaleString()}}</td>
+		<td>{{moodState.valence}}</td>
+		<td>{{moodState.arousal}}</td>
+		<td>{{moodState.anger}}</td>
+		<td>{{moodState.sadness}}</td>
+	</tr>
+	</tbody>
+</table>

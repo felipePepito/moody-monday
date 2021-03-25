@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+h2 {
+	font-size: 1.5rem;
+}
+h3 {
+	font-size: 1.25rem;
+}
+h4 {
+	font-size: 1.15rem;
+}
+
+:root {
+	--light-blue: #a8c4df;
+	--light-green: #e7f4e3;
+	--light-grey: #959595;
+}
+.border-shadow {
+	box-shadow: 0 2px 1px -1px rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 1px 3px 0 rgba(0,0,0,.12);
+	border: 1px solid rgba(0,0,0,.125);
+}
+.detached-font {
+	color: var(--light-grey);
+	font-style:italic
+}

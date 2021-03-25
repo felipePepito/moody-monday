@@ -1,1 +1,15 @@
-<h2>Mood Tracker</h2>
+<h1>Mood Tracker</h1>
+<div class="row-cols-6">
+	<form>
+		<label for="valence">Valence</label>
+		<input id="valence" class="form-range" type="range" min="1" max="7" step="1" [(ngModel)]="moodState.valence"
+					 name="valence"><br>
+		<label for="arousal">Arousal</label>
+		<input id="arousal" class="form-range" type="range" min="1" max="7" step="1" [(ngModel)]="moodState.arousal" name="arousal"><br>
+		<label for="sadness">Sadness</label>
+		<input id="sadness" class="form-range" type="range" min="1" max="7" step="1" [(ngModel)]="moodState.sadness" name="sadness"><br>
+		<label for="anger">Anger</label>
+		<input id="anger" class="form-range" type="range" min="1" max="7" step="1" [(ngModel)]="moodState.anger" name="anger">
+		<input type="button" value="Submit current mood" (click)="submitMoodState()">
+	</form>
+</div>
