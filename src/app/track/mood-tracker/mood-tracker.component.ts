@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MoodState} from '../../model/mood-state.entity';
-import {select, Store} from '@ngrx/store';
-import {createMoodState} from '../../store/actions/mood-tracker.actions';
-import {getMoodStatesIds} from '../../store';
-import {Observable} from 'rxjs';
-import {first} from 'rxjs/operators';
+import {Store} from '@ngrx/store';
+import {createMoodState} from '../../store/actions/mood-state.actions';
+import {AppState} from '../../store';
 
 @Component({
 	selector: 'app-mood-tracker',
@@ -14,40 +12,25 @@ import {first} from 'rxjs/operators';
 export class MoodTrackerComponent implements OnInit {
 
 	moodState: MoodState;
-	ids: Observable<string[] | number[]>;
 
-	constructor(private store: Store) {
-
-	}
+	constructor(
+		private store: Store<AppState>
+	) {}
 
 	ngOnInit(): void {
 		this.moodState = {
-			id: 0,
+			id: undefined,
 			date: new Date(),
-			valence: 0,
-			arousal: 0,
-			sadness: 0,
-			anger: 0,
+			valence: 4,
+			arousal: 4,
+			sadness: 4,
+			anger: 4
 		};
-		this.ids = this.store.pipe(
-			select(getMoodStatesIds)
-		);
 	}
 
 	submitMoodState(): void {
-
-		this.ids
-			.pipe(first())
-			.subscribe(
-			list => {
-				const moodState: MoodState = { ... this.moodState };
-				if (list[0] === undefined) {
-					moodState.id = 0;
-				} else {
-					moodState.id = Number(list[0]) + 1;
-				}
-				this.store.dispatch(createMoodState({moodState}));
-			});
+		const moodState: MoodState = { ... this.moodState };
+		this.store.dispatch(createMoodState({moodState}));
 	}
 
 }

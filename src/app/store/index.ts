@@ -9,14 +9,3 @@ export const reducers: ActionReducerMap<AppState> = {
 	moodStates: fromMoodState.moodStateReducer,
 };
 
-export const selectMoodStates = createFeatureSelector<fromMoodState.State>('moodStates');
-
-export const getMoodStates = createSelector(
-	selectMoodStates,
-	(moodStates) => fromMoodState.selectAllMoodStates(moodStates)
-);
-
-export const getMoodStatesIds = createSelector(
-	selectMoodStates,
-	(moodStates) => fromMoodState.selectMoodStatesIds(moodStates)
-);

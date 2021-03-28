@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {select, State, Store} from '@ngrx/store';
-import {AppState, getMoodStates} from '../../store';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../store';
 import {MoodState} from '../../model/mood-state.entity';
 import {Observable} from 'rxjs';
+import {getMoodStates} from '../../store/actions/mood-state.actions';
+import {selectMoodStates} from '../../store/selectors/mood-state.selector';
 
 @Component({
 	selector: 'app-mood-trend',
@@ -13,14 +15,16 @@ export class MoodTrendComponent implements OnInit {
 
 	moodStates: Observable<MoodState[]>;
 
-	constructor(private store: Store<AppState>) {
-	}
+	constructor(
+		private store: Store<AppState>
+	)	{}
 
 	ngOnInit(): void {
 		this.moodStates = this.store
 			.pipe(
-				select(getMoodStates)
+				select(selectMoodStates)
 			);
+		this.store.dispatch(getMoodStates());
 	}
 
 }

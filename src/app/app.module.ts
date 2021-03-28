@@ -9,6 +9,10 @@ import {StoreModule} from '@ngrx/store';
 import {moodStateReducer} from './store/reducer/mood-state.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import {MoodStateService} from './services/mood-state.service';
+import {MoodStateEffects} from './store/effects/mood-state.effects';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
 	declarations: [
@@ -17,14 +21,20 @@ import { environment } from '../environments/environment';
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
+		HttpClientModule,
 		TrackModule,
 		TrendModule,
 		StoreModule.forRoot({
 			moodStates: moodStateReducer
 		}, {}),
-		StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+		StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+		EffectsModule.forRoot([
+			MoodStateEffects
+		])
 	],
-	providers: [],
+	providers: [
+		MoodStateService
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule {
