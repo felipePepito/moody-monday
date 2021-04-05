@@ -13,6 +13,10 @@ import { EffectsModule } from '@ngrx/effects';
 import {MoodStateService} from './services/mood-state.service';
 import {MoodStateEffects} from './store/effects/mood-state.effects';
 import {HttpClientModule} from '@angular/common/http';
+import {AuthService} from './auth/auth.service';
+import {AuthModule} from './auth/auth.module';
+import {AuthEffects} from './store/effects/auth.effects';
+import {authReducer} from './store/reducer/auth.reducer';
 
 @NgModule({
 	declarations: [
@@ -24,16 +28,20 @@ import {HttpClientModule} from '@angular/common/http';
 		HttpClientModule,
 		TrackModule,
 		TrendModule,
+		AuthModule,
 		StoreModule.forRoot({
-			moodStates: moodStateReducer
+			moodStates: moodStateReducer,
+			auth: authReducer
 		}, {}),
 		StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
 		EffectsModule.forRoot([
-			MoodStateEffects
+			MoodStateEffects,
+			AuthEffects
 		])
 	],
 	providers: [
-		MoodStateService
+		MoodStateService,
+		AuthService
 	],
 	bootstrap: [AppComponent]
 })
