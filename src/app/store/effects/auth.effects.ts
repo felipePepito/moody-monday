@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {AuthService} from '../../auth/auth.service';
-import {login, loginSuccess, register, registerSuccess} from '../actions/auth.actions';
+import {login, loginSuccess, logout, logoutSuccess, register, registerSuccess} from '../actions/auth.actions';
 import {map, mergeMap, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 
@@ -15,7 +15,8 @@ export class AuthEffects {
 				mergeMap(value =>
 					this.authService.login(value.email, value.password)
 						.pipe(
-							map(user => loginSuccess({user}))
+							map(user => loginSuccess({user})),
+							tap(user => this.router.navigate(['mood-tracker']) )
 						)
 				)
 			);
@@ -29,10 +30,20 @@ export class AuthEffects {
 				mergeMap(value =>
 					this.authService.register(value.username, value.email, value.password)
 						.pipe(
-							tap(user => 	this.router.navigate(['mood-tracker'])),
-							map(user => registerSuccess({user}))
+							map(user => registerSuccess({user})),
+							tap(user => 	this.router.navigate(['mood-tracker']))
 						)
 				)
+			);
+		}
+	);
+
+	logout = createEffect(
+		() => {
+			return this.actions$.pipe(
+				ofType(logout),
+				tap(() => this.router.navigate([''])),
+				map(() => logoutSuccess())
 			);
 		}
 	);

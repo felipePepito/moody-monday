@@ -17,10 +17,12 @@ import {AuthService} from './auth/auth.service';
 import {AuthModule} from './auth/auth.module';
 import {AuthEffects} from './store/effects/auth.effects';
 import {authReducer} from './store/reducer/auth.reducer';
+import {WelcomeComponent} from './welcome.component';
 
 @NgModule({
 	declarations: [
-		AppComponent
+		AppComponent,
+		WelcomeComponent
 	],
 	imports: [
 		BrowserModule,

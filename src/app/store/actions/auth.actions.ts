@@ -15,6 +15,10 @@ export const logout = createAction(
 	'[App Component] Logout'
 );
 
+export const logoutSuccess = createAction(
+	'[Auth Effects] Logout Redirected'
+);
+
 export const registerSuccess = createAction(
 	'[Auth API] Register Success',
 	props<{user: User}>()

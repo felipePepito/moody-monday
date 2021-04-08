@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {register} from '../../store/actions/auth.actions';
 
@@ -12,23 +12,24 @@ export class RegisterComponent implements OnInit {
 
 
 	registerForm = new FormGroup({
-		username: new FormControl(''),
-		email: new FormControl(''),
-		password: new FormControl('')
+		username: new FormControl('', [Validators.required, Validators.minLength(2)]),
+		email: new FormControl('', [Validators.required, Validators.email]),
+		password: new FormControl('', [Validators.required, Validators.minLength(8)])
 	});
-
-	onSubmit(): void {
-	this.store.dispatch(register({
-		username: this.registerForm.get('username').value,
-		email: this.registerForm.get('email').value,
-		password: this.registerForm.get('password').value
-	}));
-	}
-
 
 	constructor(
 		private store: Store
 	) {}
+
+
+	onSubmit(): void {
+		this.store.dispatch(register({
+			username: this.registerForm.get('username').value,
+			email: this.registerForm.get('email').value,
+			password: this.registerForm.get('password').value
+		}));
+	}
+
 
 	ngOnInit(): void {
 	}

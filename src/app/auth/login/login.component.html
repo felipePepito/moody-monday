@@ -1,0 +1,18 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+	<fieldset>
+		<div class="row">
+			<div class="col-sm-4">
+				<label for="email" class="form-label">E-Mail</label>
+				<input id="email" type="email" formControlName="email" class="form-control" required><br>
+
+				<label for="password" class="form-label">Password</label>
+				<input id="password" type="password" formControlName="password" class="form-control" required><br>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<button type="submit" class="btn btn-primary">Login</button>
+			</div>
+		</div>
+	</fieldset>
+</form>
