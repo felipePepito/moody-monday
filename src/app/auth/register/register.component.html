@@ -1,16 +1,32 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-	<fieldset>
+	<mat-card>
+		<mat-card-title>Login</mat-card-title>
 
-		<label for="username" class="form-label">Username</label>
-		<input id="username" type="text" formControlName="username" class="form-control"><br>
+		<mat-card-content>
+			<fieldset>
+				<mat-form-field appearance="standard">
+					<mat-label>Username</mat-label>
+					<input matInput id="username" formControlName="username" required>
+					<mat-error *ngIf="username.errors?.required">Please enter a username</mat-error>
+				</mat-form-field><br>
 
-		<label for="email" class="form-label">E-Mail</label>
-		<input id="email" type="email" formControlName="email" class="form-control"><br>
+				<mat-form-field appearance="standard">
+					<mat-label>E-Mail</mat-label>
+					<input matInput id="email" formControlName="email" required>
+					<mat-error *ngIf="email.errors?.required">Please submit your E-Mail address</mat-error>
+					<mat-error *ngIf="email.errors?.email">Please enter a valid E-Mail address</mat-error>
+				</mat-form-field><br>
+				<mat-form-field appearance="standard">
+					<mat-label for="password">Password</mat-label>
+					<input matInput id="password" type="password" formControlName="password" required appPasswordStrength>
+					<mat-error *ngIf="password.errors?.required">Please submit your Password</mat-error>
+					<mat-error *ngIf="password.errors?.passwordStrength">The password must consist of 8 characters, uppercase, lowercase letters and numbers</mat-error>
+				</mat-form-field>
+			</fieldset>
+		</mat-card-content>
+		<mat-card-actions>
+			<button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
+		</mat-card-actions>
 
-		<label for="password" class="form-label">Password</label>
-		<input id="password" type="password" formControlName="password" class="form-control"><br>
-
-		<button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
-
-	</fieldset>
+	</mat-card>
 </form>

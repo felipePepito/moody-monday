@@ -18,6 +18,7 @@ import {AuthModule} from './auth/auth.module';
 import {AuthEffects} from './store/effects/auth.effects';
 import {authReducer} from './store/reducer/auth.reducer';
 import {WelcomeComponent} from './welcome.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
 	declarations: [
@@ -39,7 +40,8 @@ import {WelcomeComponent} from './welcome.component';
 		EffectsModule.forRoot([
 			MoodStateEffects,
 			AuthEffects
-		])
+		]),
+		BrowserAnimationsModule
 	],
 	providers: [
 		MoodStateService,

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {login} from '../../store/actions/auth.actions';
 
@@ -29,4 +29,6 @@ export class LoginComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
+	get email(): AbstractControl { return this.loginForm.get('email'); }
+	get password(): AbstractControl { return this.loginForm.get('password'); }
 }
